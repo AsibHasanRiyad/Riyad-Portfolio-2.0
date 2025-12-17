@@ -6,8 +6,8 @@ export function ModelRotationWrapper({ children }) {
   const group = React.useRef();
 
   // Max rotation limits (radians)
-  const MAX_Y = 0.5; // left-right
-  const MAX_X = 0.2; // up-down
+  const MAX_Y = 24; // left-right
+  const MAX_X = 0; // up-down
 
   useFrame(({ mouse }) => {
     if (!group.current) return;
