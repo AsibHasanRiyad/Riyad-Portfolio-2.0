@@ -151,14 +151,17 @@ const Contact = () => {
                 {[
                   {
                     icon: Facebook,
-                    href: "https://www.facebook.com/abdullahbinashraf77",
+                    href: "https://www.facebook.com/syd.ryd",
                   },
 
                   {
                     icon: Instagram,
-                    href: "https://www.instagram.com/eshak_ahmed/",
+                    href: "https://www.instagram.com/sayad_riyad/",
                   },
-                  { icon: Linkedin, href: "linkedin.com/in/eshakmahmed" },
+                  {
+                    icon: Linkedin,
+                    href: "https://www.linkedin.com/in/asibhasan/?skipRedirect=true",
+                  },
                 ].map((social, index) => (
                   <a
                     key={index}
