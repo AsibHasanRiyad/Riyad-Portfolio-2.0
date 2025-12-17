@@ -9,7 +9,7 @@ import ProjectShowCase from "../components/ProjectShowCase";
 
 const Home = () => {
   return (
-    <div className="relative">
+    <div className="relative font-neuhade">
       <div className=" z-50">
         <div id="home">
           <Hero />

@@ -43,16 +43,16 @@ export default function Hero() {
               <div className="space-y-4">
                 <TextMaskReveal
                   splitByWord={true}
-                  fontSize="text-6xl md:text-7xl lg:text-7xl 2xl:text-8xl"
-                  className="text-secondary text-center lg:text-start tracking-wider font-foregen font-bold text-pretty"
+                  fontSize="text-6xl lg:text-6xl 2xl:text-7xl"
+                  className="text-secondary text-center lg:text-start tracking-wider font-neuhade font-bold text-pretty"
                   text="Asib Hasan"
                   delayPerItem={0.08}
                 />
 
                 <TextMaskReveal
                   splitByWord={true}
-                  fontSize="text-6xl md:text-7xl lg:text-7xl 2xl:text-8xl"
-                  className="text-secondary text-center lg:text-start tracking-wider font-foregen font-bold text-pretty"
+                  fontSize="text-6xl md:text-6xl lg:text-5xl 2xl:text-7xl"
+                  className="text-secondary text-center lg:text-start tracking-wider font-neuhade font-bold text-pretty"
                   text="Riyad"
                   delayPerItem={0.08}
                 />

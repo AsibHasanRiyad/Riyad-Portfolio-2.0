@@ -2,7 +2,7 @@ import ReactLenis from "lenis/react";
 
 const SmoothScrollProvider = ({ children }) => {
   const lenisOptions = {
-    duration: 1.2,
+    duration: 0.5,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction: "vertical",
     gestureDirection: "vertical",
@@ -10,7 +10,7 @@ const SmoothScrollProvider = ({ children }) => {
     smoothTouch: false,
     touchMultiplier: 2,
     infinite: false,
-    lerp: 0.1,
+    lerp: 0.5,
     wheelMultiplier: 1,
     orientation: "vertical",
     smoothWheel: true,

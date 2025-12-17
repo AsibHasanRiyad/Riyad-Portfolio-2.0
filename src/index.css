@@ -1,14 +1,4 @@
 @import "tailwindcss";
-@font-face {
-  font-family: "Foregen";
-  src: url("../public/The\ Foregen\ Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "sixcaps";
-  src: url("../public/SixCaps.ttf") format("opentype");
-}
 
 @font-face {
   font-family: "Neuhade";
