@@ -83,7 +83,7 @@ const Services = () => {
                   to={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex justify-center lg:justify-between items-center bg-white/95 px-4 py-3 rounded-xl gap-6  duration-300 transition-all hover:scale-[1.02] "
+                  className="group flex justify-center lg:justify-between items-center bg-primary/75 px-4 py-3 rounded-xl gap-6  duration-300 transition-all hover:scale-[1.02] "
                 >
                   {/* Index */}
                   <span className="w-8 hidden lg:block text-sm text-black">

@@ -8,6 +8,7 @@ import emc from "../assets/emc.webp";
 import rla from "../assets/rla.webp";
 import ignited from "../assets/ignited.webp";
 import { TextMaskReveal } from "./TextMaskReveal";
+import { Link } from "react-router-dom";
 const projects = [
   {
     name: "DTech Online Ltd – Portfolio Website",
@@ -202,13 +203,17 @@ export default function MinimalProjectShowcase() {
 
                   {/* Project Name */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                    <h3 className="text-white text-xl md:text-2xl font-bold">
+                    <Link
+                      to={project.link}
+                      target="blank"
+                      className="text-white text-xl md:text-2xl font-bold"
+                    >
                       {project.name}
-                    </h3>
+                    </Link>
                   </div>
 
                   {/* Link Button */}
-                  <a
+                  <Link
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -223,7 +228,7 @@ export default function MinimalProjectShowcase() {
     "
                   >
                     <ArrowUpRight className="text-white w-6 h-6" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
