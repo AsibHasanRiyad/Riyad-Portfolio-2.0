@@ -10,7 +10,7 @@ CustomEase.create("hop", "0.9, 0, 0.1, 1");
 
 let hasLoaded = false;
 
-const Preloader = ({ onComplete }) => {
+const Preloader = () => {
   const [isVisible, setIsVisible] = useState(!hasLoaded);
 
   useEffect(() => {
@@ -68,7 +68,6 @@ const Preloader = ({ onComplete }) => {
         onComplete: () => {
           gsap.set(".loader", { pointerEvents: "none" });
           setIsVisible(false);
-          if (onComplete) onComplete();
         },
       },
       "<"

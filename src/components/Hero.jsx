@@ -13,7 +13,7 @@ import StatsSection from "./StatSection";
 export default function Hero() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      <div style={{ width: "100%", height: "100%", position: "absolute" }}>
+      {/* <div style={{ width: "100%", height: "100%", position: "absolute" }}>
         <PixelBlast
           variant="circle"
           pixelSize={5}
@@ -30,7 +30,7 @@ export default function Hero() {
           edgeFade={0}
           transparent
         />
-      </div>
+      </div> */}
       <div className="absolute hidden lg:block inset-0 z-0 lg:z-20 pointer-events-none">
         <HeroModel />
       </div>

@@ -31,7 +31,7 @@ export default function StatsSection() {
       sublabel: "WORLDWIDE",
     },
     {
-      value: 100,
+      value: 99,
       suffix: "%",
       label: "CLIENT",
       sublabel: "SATISFACTION",

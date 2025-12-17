@@ -23,7 +23,6 @@ const Home = () => {
           <SkillsSection />
         </div>
         <div id="my-projects">
-          {/* <MyProject /> */}
           <ProjectShowCase />
         </div>
         <div id="contact">
