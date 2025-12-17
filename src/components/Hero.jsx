@@ -52,7 +52,7 @@ export default function Hero() {
                 <TextMaskReveal
                   splitByWord={true}
                   fontSize="text-6xl md:text-6xl lg:text-5xl 2xl:text-7xl"
-                  className="text-secondary text-center lg:text-start tracking-wider font-neuhade font-bold text-pretty"
+                  className="text-secondary -mt-8 text-center lg:text-start tracking-wider font-neuhade font-bold text-pretty"
                   text="Riyad"
                   delayPerItem={0.08}
                 />
