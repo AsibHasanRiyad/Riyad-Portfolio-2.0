@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+
 import {
   Facebook,
   Instagram,
@@ -12,12 +14,14 @@ import {
 } from "lucide-react";
 import { TextMaskReveal } from "./TextMaskReveal";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const form = useRef();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    from_name: "",
+    to_name: "Asib Hasan Riyad",
+    from_email: "",
     message: "",
   });
 
@@ -30,16 +34,9 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+
     const toastId = toast.loading("Sending message...");
 
-    // Simulate email sending
-    setTimeout(() => {
-      toast.success("Message sent successfully!", { id: toastId });
-      setFormData({ name: "", email: "", message: "" });
-      form.current.reset();
-    }, 1500);
-
-    /* Uncomment for actual emailjs integration
     emailjs
       .sendForm(
         "service_hbp47fl",
@@ -48,16 +45,21 @@ const Contact = () => {
         "PR07K8CX4TXAFdHfO"
       )
       .then(
-        (result) => {
-          toast.success("Email Successfully Sent!", { id: toastId });
-          setFormData({ name: "", email: "", message: "" });
+        () => {
+          toast.success("Message sent successfully!", { id: toastId });
+          setFormData({
+            from_name: "",
+            to_name: "Asib Hasan Riyad",
+            from_email: "",
+            message: "",
+          });
           form.current.reset();
         },
         (error) => {
-          toast.error("Failed to send email.", { id: toastId });
+          console.error(error);
+          toast.error("Failed to send message", { id: toastId });
         }
       );
-    */
   };
 
   return (
@@ -99,47 +101,33 @@ const Contact = () => {
                 </div>
               </div>
 
-              <a
-                href="https://wa.me/8801568260699"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="group flex items-start gap-4 p-5 rounded-xl bg-zinc-900/50 border cursor-pointer border-zinc-800 hover:border-secondary transition-all duration-300">
-                  <div className="p-3 rounded-lg bg-secondary group-hover:bg-secondary/70 duration-500 transition-colors">
-                    <IconBrandWhatsapp className="w-5 h-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-primary font-foregen font-semibold mb-1">
-                      Phone
-                    </h3>
-                    <p className="text-gray-400 text-sm">+8801568260699</p>
-                  </div>
+              <div className="group flex items-start gap-4 p-5 rounded-xl bg-zinc-900/50 border cursor-pointer border-zinc-800 hover:border-secondary transition-all duration-300">
+                <div className="p-3 rounded-lg bg-secondary group-hover:bg-secondary/70 duration-500 transition-colors">
+                  <IconBrandWhatsapp className="w-5 h-5 text-white" />
                 </div>
-              </a>
 
-              <a
-                href="mailto:asibhasanriyad@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="group flex items-start gap-4 p-5 rounded-xl bg-zinc-900/50 border cursor-pointer border-zinc-800 hover:border-secondary transition-all duration-300">
-                  <div className="p-3 rounded-lg bg-secondary group-hover:bg-secondary/70 duration-500 transition-colors">
-                    <Mail className="w-5 h-5 text-white" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-primary font-foregen font-semibold mb-1">
-                      Email
-                    </h3>
-                    <p className="text-gray-400 text-sm">
-                      asibhasanriyad@gmail.com
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-primary font-foregen font-semibold mb-1">
+                    Phone
+                  </h3>
+                  <p className="text-gray-400 text-sm">+8801568260699</p>
                 </div>
-              </a>
+              </div>
+
+              <div className="group flex items-start gap-4 p-5 rounded-xl bg-zinc-900/50 border cursor-pointer border-zinc-800 hover:border-secondary transition-all duration-300">
+                <div className="p-3 rounded-lg bg-secondary group-hover:bg-secondary/70 duration-500 transition-colors">
+                  <Mail className="w-5 h-5 text-white" />
+                </div>
+
+                <div>
+                  <h3 className="text-primary font-foregen font-semibold mb-1">
+                    Email
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    asibhasanriyad@gmail.com
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Social Links */}
@@ -186,16 +174,16 @@ const Contact = () => {
               {/* Name Input */}
               <div className="space-y-2">
                 <label
-                  htmlFor="name"
+                  htmlFor="from_name"
                   className="block text-sm font-medium text-gray-300"
                 >
                   Your Name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="from_name"
+                  name="from_name"
+                  value={formData.from_name}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3  border border-zinc-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
@@ -206,16 +194,16 @@ const Contact = () => {
               {/* Email Input */}
               <div className="space-y-2">
                 <label
-                  htmlFor="email"
+                  htmlFor="from_email"
                   className="block text-sm font-medium text-gray-300"
                 >
                   Email Address
                 </label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="from_email"
+                  name="from_email"
+                  value={formData.from_email}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3  border border-zinc-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
