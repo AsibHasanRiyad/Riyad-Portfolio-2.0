@@ -18,7 +18,11 @@ export default function Hero() {
         <HeroModel />
       </div>
 
-      <div className="min-h-screen lg:gap-20 flex-col container mx-auto md:px-8 text-white flex items-center justify-center lg:mt-28 px-4 py-12 relative">
+      <div
+        className="min-h-screen lg:gap-20 flex-col container mx-auto md:px-8 text-white flex items-center justify-center
+      
+       px-4 py-12 relative"
+      >
         <div className="w-full container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-center">
             {/* Left Section: Branding */}
@@ -105,7 +109,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <StatsSection />
+        {/* <StatsSection /> */}
       </div>
     </div>
   );

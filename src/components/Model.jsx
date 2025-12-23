@@ -9,7 +9,7 @@ export function HeroModel() {
       <ModelRotationWrapper>
         <ProfileModel
           scale={2.9}
-          position={[0, -1.6, 0]}
+          position={[0, -2, 0]}
           rotation={[0.02, 1.3, 0]}
         />
       </ModelRotationWrapper>

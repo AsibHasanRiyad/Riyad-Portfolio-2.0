@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable no-unused-vars */
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, animate } from "motion/react";
@@ -9,73 +11,56 @@ import rla from "../assets/rla.webp";
 import ignited from "../assets/ignited.webp";
 import { TextMaskReveal } from "./TextMaskReveal";
 import { Link } from "react-router-dom";
+import saatSotero from "../assets/717.webp";
+import ticketAse from "../assets/ticketase.webp";
+import znrf from "../assets/znrf.webp";
+import lbHealth from "../assets/lbHealth.webp";
 const projects = [
   {
     name: "DTech Online Ltd – Portfolio Website",
     img: dtech,
     link: "https://dtechonline.dev/",
-    description:
-      "A fully responsive portfolio website built from scratch with smooth animations, clean UI/UX, and buttery Lenis-powered scrolling.",
-    points: [
-      "Designed complete UI/UX and animated interactions.",
-      "Integrated smooth scrolling using Lenis.",
-      "Implemented dynamic animations with GSAP & Framer Motion.",
-      "Optimized performance and visual consistency.",
-    ],
   },
-
-  {
-    name: "Ignited – Flight Management Portal",
-    img: ignited,
-    link: "#",
-    description:
-      "A complete enterprise-grade flight management system with multi-tenant structure and secure access control.",
-    points: [
-      "Implemented tenant-based architecture.",
-      "Built a granular role-based user management system.",
-      "Includes booking, scheduling, and admin features.",
-      "Designed secure authentication workflows.",
-    ],
-  },
-
   {
     name: "Xolaren – Solar Company Website",
     img: xolaren,
     link: "https://xolaren.vercel.app/",
-    description:
-      "A solar energy company website featuring a solar calculator and a custom PHP Filament CMS.",
-    points: [
-      "Built theme-consistent UI/UX across pages.",
-      "Developed backend CMS using PHP Filament.",
-      "Created solar capacity calculator.",
-      "Integrated GSAP + Framer Motion animations.",
-    ],
+  },
+  {
+    name: "717 – E-commerce Website",
+    img: saatSotero,
+    link: "https://saatsotero.com/",
+  },
+  {
+    name: "Ticketase – Ticketing Platform",
+    img: ticketAse,
+    link: "https://www.ticketase.com/",
+  },
+  {
+    name: "ZNFR University of Management Sciences",
+    img: znrf,
+    link: "https://zums.edu.bd/",
+  },
+  {
+    name: "LB Health – Healthcare Platform",
+    img: lbHealth,
+    link: "https://lb-health.vercel.app/",
+  },
+  {
+    name: "Ignited – Flight Management Portal",
+    img: ignited,
+    link: "#",
   },
 
   {
     name: "EMC Power – Power Company Website",
     img: emc,
     link: "https://emcpowercore.com/",
-    description:
-      "A modern and fast-loading corporate website for a power solutions company.",
-    points: [
-      "Clean and professional UI.",
-      "SEO-optimized and responsive.",
-      "Smooth animation-driven sections.",
-    ],
   },
-
   {
     name: "Rahman Law Associates – Law Firm Website",
     img: rla,
     link: "https://beta.rahmanlaw.net/",
-    description:
-      "A law firm website designed for clarity, trust, and professional representation.",
-    points: [
-      "Structured legal service pages.",
-      "Clean UI with well-balanced typography.",
-      "Animation-enhanced navigation experience.",
-    ],
   },
 ];
 
@@ -84,6 +69,11 @@ export default function MinimalProjectShowcase() {
   const [slidesToShow, setSlidesToShow] = useState(1);
   const containerRef = useRef(null);
   const x = useMotionValue(0);
+  const [dragBounds, setDragBounds] = useState({ left: 0, right: 0 });
+  const [computedSlideWidth, setComputedSlideWidth] = useState(0);
+
+  // Keep this in sync with the Tailwind `gap-6` class (24px)
+  const GAP_PX = 24;
 
   // Responsive breakpoints
   useEffect(() => {
@@ -102,8 +92,10 @@ export default function MinimalProjectShowcase() {
   useEffect(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.offsetWidth || 1;
-      const slideWidth = containerWidth / slidesToShow;
-      const targetX = -index * slideWidth;
+      const slideWidth =
+        (containerWidth - (slidesToShow - 1) * GAP_PX) / slidesToShow;
+      setComputedSlideWidth(slideWidth);
+      const targetX = -index * (slideWidth + GAP_PX);
       animate(x, targetX, {
         type: "spring",
         stiffness: 300,
@@ -114,13 +106,35 @@ export default function MinimalProjectShowcase() {
 
   // Adjust index if needed
   useEffect(() => {
-    const maxIndex = Math.max(0, projects.length - slidesToShow);
+    const maxIndex = Math.max(0, Math.floor(projects.length - slidesToShow));
     if (index > maxIndex) {
       setIndex(maxIndex);
     }
   }, [slidesToShow, index]);
 
-  const maxIndex = Math.max(0, projects.length - slidesToShow);
+  const maxIndex = Math.max(0, Math.floor(projects.length - slidesToShow));
+
+  // Update drag constraints whenever layout changes
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const containerWidth = containerRef.current.offsetWidth || 1;
+    const slideWidth =
+      (containerWidth - (slidesToShow - 1) * GAP_PX) / slidesToShow;
+    const trackWidth =
+      projects.length * slideWidth + (projects.length - 1) * GAP_PX;
+    const left = -(trackWidth - containerWidth);
+    setComputedSlideWidth(slideWidth);
+    setDragBounds({ left, right: 0 });
+  }, [slidesToShow]);
+
+  const handleDragEnd = () => {
+    if (!computedSlideWidth) return;
+    const step = computedSlideWidth + GAP_PX;
+    const current = x.get();
+    const rawIndex = Math.round(Math.abs(current) / step);
+    const clamped = Math.max(0, Math.min(rawIndex, maxIndex));
+    setIndex(clamped);
+  };
 
   return (
     <div className="w-full px-4 md:px-8 py-16">
@@ -171,14 +185,21 @@ export default function MinimalProjectShowcase() {
 
         {/* Carousel */}
         <div className="relative overflow-hidden" ref={containerRef}>
-          <motion.div className="flex gap-6" style={{ x }}>
+          <motion.div
+            className="flex gap-6"
+            style={{ x }}
+            drag="x"
+            dragConstraints={dragBounds}
+            dragMomentum={false}
+            onDragEnd={handleDragEnd}
+          >
             {projects.map((project) => (
               <div
-                key={project.id}
+                key={project.name}
                 className="shrink-0"
                 style={{
                   width: `calc((100% - ${
-                    (slidesToShow - 1) * 24
+                    (slidesToShow - 1) * GAP_PX
                   }px) / ${slidesToShow})`,
                 }}
               >
