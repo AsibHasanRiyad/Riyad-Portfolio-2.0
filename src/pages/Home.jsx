@@ -18,7 +18,10 @@ const Home = () => {
         <div id="my-journey">
           <MyJourney />
         </div>
-        <Services />
+        <div id="services">
+          <Services />
+        </div>
+
         <div id="skills">
           <SkillsSection />
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { TextMaskReveal } from "./TextMaskReveal";
 import { ArrowRight } from "lucide-react";
@@ -46,13 +47,13 @@ export default function SkillsSection() {
   };
 
   return (
-    <section className="w-full -mt-[30vh] md:-mt-[40vh] lg:-mt-[20vh] py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-8 relative overflow-hidden">
+    <section className="w-full -mt-[12vh] md:-mt-[20vh] lg:-mt-[20vh] py-12 md:py-16 lg:py-20 px-4 md:px-8  relative overflow-hidden">
       <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-t from-primary/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-linear-to-b from-primary/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-linear-to-t from-primary/5 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <div className=" container px-4 md:px-8 mx-auto relative z-10">
+      <div className=" container  mx-auto relative z-10">
         <div className="mb-16 md:mb-20">
           <TextMaskReveal
             text="Key Skills"

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/static-components */
 import { ArrowRight } from "lucide-react";
 import {
@@ -15,6 +16,7 @@ export function MainNavbar() {
   const navItems = [
     { name: "Home", link: "#home" },
     { name: "My Journey", link: "#my-journey" },
+    { name: "Services", link: "#services" },
     { name: "Skills", link: "#skills" },
     { name: "Projects", link: "#my-projects" },
     { name: "Contact", link: "#contact" },

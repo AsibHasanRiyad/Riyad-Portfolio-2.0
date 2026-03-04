@@ -23,7 +23,7 @@ const myJourney = [
   {
     id: 2,
     year: "February 2024 – September 2024",
-    title: "JUNIOR FRONT-END DEVELOPER — RAINIER TECHNOLOGY",
+    title: "Junior Front-End Developer — Rainier Technology",
     description:
       "Worked as a Junior Front-End Developer, focusing on building modern, responsive, and scalable web applications using Vue.js. Contributed to real-world production systems across education and healthcare domains.",
     details: [
@@ -39,7 +39,7 @@ const myJourney = [
   {
     id: 3,
     year: "October 2024 – Present",
-    title: "JUNIOR SOFTWARE ENGINEER — DTECH ONLINE LIMITED",
+    title: "Junior Software Engineer — Skylark Soft Limited",
     description:
       "Currently working as a Junior Software Engineer, developing full-featured web applications using modern technologies including React, Next.js, and Laravel. Actively involved in building scalable systems, interactive UI, and animation-rich user experiences.",
     details: [
@@ -110,7 +110,7 @@ const MyJourney = () => {
                     key={section.id}
                     onClick={() => {
                       const el = document.getElementById(
-                        `section-${section.id}`
+                        `section-${section.id}`,
                       );
                       el?.scrollIntoView({ behavior: "smooth" });
                     }}
@@ -136,7 +136,7 @@ const MyJourney = () => {
         </div>
 
         {/* RIGHT CONTENT */}
-        <div className="lg:col-span-3 space-y-24">
+        <div className="lg:col-span-3 space-y-12 lg:space-y-24">
           {myJourney.map((section) => (
             <div
               key={section.id}
@@ -148,7 +148,7 @@ const MyJourney = () => {
                 <TextMaskReveal
                   text={section.title}
                   splitByWord
-                  fontSize="text-3xl md:text-4xl lg:text-5xl"
+                  fontSize="text-2xl md:text-4xl lg:text-5xl"
                   className=" font-normal text-secondary"
                 />
 
